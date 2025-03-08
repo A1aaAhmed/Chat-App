@@ -8,7 +8,7 @@ import Profile from "../layout/pages/profile";
 
 export const router = createBrowserRouter([
     {
-        path: "chapApp",
+        path: "/",
         element: <App />, // use outlet incase of parent component 
         children: [
             {
