@@ -27,7 +27,7 @@ export const router = createBrowserRouter([
         Component: InfoPage,
       },
       {
-        path: "/chat",
+        path: "/chat/:id",
         Component: ChatPage,
       },
       {

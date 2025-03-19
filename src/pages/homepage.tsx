@@ -20,12 +20,16 @@ import {
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import { addToContacts } from "../store/slices/contacts-slice";
+import {
+  addToContacts,
+  removeFromContacts,
+} from "../store/slices/contacts-slice";
 import toast from "react-hot-toast";
 
 const Homepage = () => {
   const users = useAppSelector((state) => state.users.list);
   const contacts = useAppSelector((state) => state.contacts.list);
+  const chats = useAppSelector((state)=>state.chats.list)
 
   const dispatch = useAppDispatch();
 
@@ -65,7 +69,7 @@ const Homepage = () => {
 
           {/* Chat List */}
           <Container fluid className="flex-grow-1 overflow-auto ">
-            <h3>Friends</h3>
+            <h3>Requested Friends</h3>
 
             <ListGroup>
               {users.map((user) => (
@@ -80,12 +84,14 @@ const Homepage = () => {
                     id="users-image"
                   />
                   <div>
+                  <Nav.Link  as={Link} to={`/chat/${user.id}`}>
                     <div id="users-name">
                       <strong>{user.username}</strong>
                       <p className="mb-0 text-muted " id="user-message">
                         {user.message}
                       </p>
                     </div>
+                    </Nav.Link>
                     {/* Buttons */}
                     <div className="position-absolute top-50 end-0 translate-middle-y d-flex   gap-2">
                       <Button
@@ -99,18 +105,22 @@ const Homepage = () => {
                       >
                         Add Friend
                       </Button>
-                      <Button className="btn-delete" variant="danger" size="sm">
+                      <Button
+                        className="btn-delete"
+                        variant="danger"
+                        size="sm"
+                        onClick={() => {
+                          dispatch(removeFromContacts(user.id));
+                          toast.error("Friend Deleted");
+                        }}
+                      >
                         Delete
                       </Button>
-                      <Button
-                        as={Link}
-                        to={`/user/${user.id}`}
-                        className="btn-delete"
-                        variant="info"
-                        size="sm"
-                      >
-                        Info
-                      </Button>
+                      <Nav.Link as={Link} to={`/user/${user.id}`}>
+                        <Button className="btn-delete" variant="info" size="sm">
+                          Info
+                        </Button>
+                      </Nav.Link>
                     </div>
                   </div>{" "}
                 </ListGroup.Item>
@@ -143,7 +153,7 @@ const Homepage = () => {
                   <div className="position-relative">
                     <FaComments size={24} className="text-primary" />
                     <span>
-                      <Badge bg="danger">1</Badge>
+                      <Badge bg="danger">{chats?.length}</Badge>
                       <p className="mb-0 text-primary">Chats</p>
                     </span>
                   </div>

@@ -2,6 +2,12 @@ import { useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks/redux-hooks";
 import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
 
+
+
+
+
+
+
 const InfoPage = () => {
   const params = useParams();
   const userId = params.id ?? "";
