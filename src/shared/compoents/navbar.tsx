@@ -8,6 +8,10 @@ import { FiMessageSquare } from "react-icons/fi";
 import { IoSettingsOutline } from "react-icons/io5";
 import { RiContactsLine } from "react-icons/ri";
 import { useState } from "react";
+// import { Link, Outlet } from "react-router-dom";
+// import Container from 'react-bootstrap/Container';
+// import Nav from 'react-bootstrap/Nav';
+
 
 function Navbar() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -96,26 +100,26 @@ function Navbar() {
                 <ul className="dropdown-menu p-2">
                   <li className="d-flex align-items-center">
                   <img src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg" className="rounded-circle" width="50" height="50" alt="Avatar"/>
-                    <a className="dropdown-item" href="#">Maha Hassan</a></li>
+                    <a className="dropdown-item" href="/">Maha Hassan</a></li>
                   <hr/>
                   <li className="d-flex align-items-center">
                     <FiMessageSquare size={24}/>
-                    <a className="dropdown-item" href="#">Saved Messages</a>
+                    <a className="dropdown-item" href="/saved">Saved Messages</a>
                   </li>
                   <li className="d-flex align-items-center">
                     <RiContactsLine size={24}/>
-                    <a className="dropdown-item" href="#">contacts</a>
+                    <a className="dropdown-item" href="/profile">Profile</a>
                   </li>
                   <li className="d-flex align-items-center">
                     <IoSettingsOutline size={24}/>
-                    <a className="dropdown-item" href="#">Settings</a>
+                    <a className="dropdown-item" href="/settings">Settings</a>
                   </li>
                 </ul>
               </li>
             </ul>
 
             {/* Center - Search Field */}
-            <form className="d-none d-lg-flex w-75">
+            <form className="d-none d-lg-flex ">
               <input
                 className="form-control"
                 type="search"
@@ -125,6 +129,18 @@ function Navbar() {
           </div>
         </div>
       </nav>
+
+      {
+      /* <Navbar bg="primary" data-bs-theme="dark">
+        <Container>
+          <Navbar.Brand as={Link} to="/">Hola</Navbar.Brand>
+          <Nav className="me-auto">
+            <Nav.Link  as={Link} to="/">Home</Nav.Link>
+            <Nav.Link  as={Link} to="/profile">Profile</Nav.Link>
+          </Nav>
+        </Container>
+      </Navbar> */
+      }
     </>
   );
 }
