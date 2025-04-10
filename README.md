@@ -1,7 +1,7 @@
 # React + TypeScript + Vite
 ## to run :
-  1- npm i
-  2- npm run dev
+1) npm i
+2)  2- npm run dev
 ## endpoint :
 https://chatapp-backend-production-445b.up.railway.app/
 ## backend repo:
