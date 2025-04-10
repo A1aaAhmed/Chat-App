@@ -1,6 +1,6 @@
 import { useParams } from "react-router-dom";
 import { useAppSelector } from "../hooks/redux-hooks";
-import { Button, Card, Col, Container, ListGroup, Row } from "react-bootstrap";
+import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 
 
 
@@ -17,18 +17,11 @@ const InfoPage = () => {
     return item.id.toString() === userId.toString();
   })[0];
 
-  //console.log(user);
 
   return (
-    <div>
-      InfoPage 
-      <section>
-        <Container
-          fluid
-          className="d-flex justify-content-center align-items-center vh-100 bg-light"
-        >
-
-          <Row className="w-100 justify-content-center">
+ 
+    
+          <Row className="w-100 justify-content-center h-100 mt-4">
             <Col xs={12} md={8} lg={6} xl={4}>
               <Card className="shadow-sm">
 
@@ -38,7 +31,7 @@ const InfoPage = () => {
               src={user.image} 
               alt={user.username} 
               className="img-fluid" 
-              style={{ height: '200px', objectFit: 'cover' }} 
+              style={{ height: '150px', objectFit: 'cover' }} 
             />
                 <Card.Body>
                   <Card.Title className="text-center">
@@ -57,22 +50,20 @@ const InfoPage = () => {
                   </ListGroup.Item>
                 </ListGroup>
                 <Card.Body className="d-grid gap-2">
-                  <Button variant="primary" size="lg">
+                  <Button variant="primary" size="sm">
                     Send Message
                   </Button>
-                  <Button variant="secondary" size="lg">
+                  <Button variant="secondary" size="sm">
                     Share Contact
                   </Button>
-                  <Button variant="success" size="lg">
+                  <Button variant="success" size="sm">
                     Start Secret Chat
                   </Button>
                 </Card.Body>
               </Card>
             </Col>
           </Row>
-        </Container>
-      </section>
-    </div>
+
   );
 };
 
