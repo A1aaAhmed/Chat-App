@@ -1,7 +1,7 @@
 # React + TypeScript + Vite
 ## to run :
 1) npm i
-2)  2- npm run dev
+2) npm run dev
 ## Deployment Link :
 - https://chat-app-production-9b66.up.railway.app/
 ## endpoint :
