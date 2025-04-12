@@ -1,0 +1,43 @@
+#users-name {
+  max-width: 100%;
+  overflow: "hidden";
+  text-overflow: "ellipsis";
+  white-space: "nowrap";
+}
+
+#user-message {
+  overflow: "hidden";
+  text-overflow: "ellipsis";
+  white-space: "nowrap";
+}
+@media (max-width: 450px) {
+  #user-message {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for truncated text */
+    max-width: 150px; /* Adjust as needed */
+  }
+  .btn-add-fav {
+    max-width: 4rem;
+    max-height: 1.5rem;
+  }
+}
+@media (min-width: 450px) and (max-width: 850px) {
+  #user-message {
+    white-space: nowrap; /* Prevent text from wrapping */
+    overflow: hidden; /* Hide overflow */
+    text-overflow: ellipsis; /* Add ellipsis for truncated text */
+    max-width: 150px; /* Adjust as needed */
+  }
+  .btn-add-fav {
+    max-width: 8rem;
+    max-height: 6rem;
+  }
+}
+
+#users-image {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  margin-right: 12px;
+}
