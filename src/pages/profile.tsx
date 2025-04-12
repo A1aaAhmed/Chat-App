@@ -1,3 +1,4 @@
+import { NavLink } from "react-router-dom"
 
 
 
@@ -16,13 +17,16 @@ const Profile = () => {
       {/* Header */}
       <div style={{ display: "flex", alignItems: "center", padding: 15 }}>
         {/* Back Arrow Button */}
+
+        <NavLink to="/">
         <button style={{ background: "none", border: "none", cursor: "pointer" }}>
           <img
-            src="./src/assets/Buttons/271220.png"
+            src="./assets/Buttons/271220.png"
             alt="Back"
             style={{ width: 24, height: 24, filter: "brightness(0) invert(1)" }}
           />
         </button>
+        </NavLink>
 
         <div style={{ flex: 1 }} />
 
@@ -36,7 +40,7 @@ const Profile = () => {
           }}
         >
           <img
-            src="./src/assets/Buttons/1827933.png"
+            src="./assets/Buttons/1827933.png"
             alt="Edit"
             style={{ width: 20, height: 20, filter: "brightness(0) invert(1)" }}
           />
@@ -45,7 +49,7 @@ const Profile = () => {
         {/* Menu Button */}
         <button style={{ background: "none", border: "none", cursor: "pointer" }}>
           <img
-            src="./src/assets/Buttons/2311524.png"
+            src="./assets/Buttons/2311524.png"
             alt="Menu"
             style={{ width: 20, height: 20, filter: "brightness(0) invert(1)" }}
           />

@@ -1,0 +1,70 @@
+body {
+    margin: 0;
+    background-color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+  }
+  
+  .calls-container {
+    padding: 20px;
+    background-color: #ffffff;
+    width: 100%;
+    margin: 0 auto; /* توسيط العنصر */
+    max-height: 100vh;
+    box-sizing: border-box;
+  }
+  
+  .calls-container h4 {
+    margin-bottom: 20px;
+    color: #000;
+  }
+  
+  .call-entry {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 15px 20px;
+    margin-bottom: 12px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+  }
+  
+  .call-entry img {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+  }
+  
+  .call-info {
+    flex-grow: 1;
+    padding: 0 15px;
+  }
+  
+  .call-info .name {
+    font-weight: bold;
+    color: #333;
+    font-size: 16px;
+  }
+  
+  .call-info .time {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  
+  .time.missed {
+    color: red;
+  }
+  
+  .time.incoming {
+    color: green;
+  }
+  
+  .time.outgoing {
+    color: teal;
+  }
+  
+  .call-icon {
+    font-size: 20px;
+    color: red;
+  }
+  

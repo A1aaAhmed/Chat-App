@@ -1,7 +1,7 @@
 import { Outlet } from 'react-router-dom'
 // import './App.css'
 import Navbar from './shared/compoents/navbar'
-import Footer from './pages/footer';
+import Footer from './shared/compoents/footer';
 function App() {
   return (
     <div className="container-fluid">

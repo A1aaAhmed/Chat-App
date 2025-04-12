@@ -1,13 +1,16 @@
 import { Container, Row, Col, Nav, Badge } from 'react-bootstrap';
-import { FaUser, FaPhone, FaComments, FaCog } from 'react-icons/fa';
+import { FaUser, FaPhone, FaComments,FaUsers  } from 'react-icons/fa';
 import { Link, useLocation } from 'react-router-dom';
-import { useAppSelector } from '../hooks/redux-hooks';
+import { useAppSelector } from '../../hooks/redux-hooks';
 
 const Footer = () => {
-  const contacts = useAppSelector((state) => state.contacts.list);
+  // const contacts = useAppSelector((state) => state.contacts.list);
   const chats = useAppSelector((state) => state.chats.list);
   const location = useLocation();
-
+  if (location.pathname === '/profile' || location.pathname.includes('chat')) {
+    return null;
+  }
+  
   return (
     <footer className="bg-light py-2 position-fixed bottom-0 w-100 border-top shadow-sm">
       <Container fluid className="p-0 m-0">
@@ -18,9 +21,9 @@ const Footer = () => {
               to="/contacts"
               className={location.pathname === '/contacts' ? 'text-primary' : 'text-secondary'}
             >
-              <FaUser size={24} />
+              <FaUsers  size={24} />
               <span>
-                <Badge bg="danger">{contacts?.length}</Badge>
+                {/* <Badge bg="danger">{contacts?.length}</Badge> */}
                 <p className="mb-0">Contacts</p>
               </span>
             </Nav.Link>
@@ -53,11 +56,11 @@ const Footer = () => {
           <Col>
             <Nav.Link
               as={Link}
-              to="/settings"
+              to="/profile"
               className={location.pathname === '/settings' ? 'text-primary' : 'text-secondary'}
             >
-              <FaCog size={24} />
-              <p className="mb-0">Settings</p>
+              <FaUser size={24} />
+              <p className="mb-0">Profile</p>
             </Nav.Link>
           </Col>
         </Row>
