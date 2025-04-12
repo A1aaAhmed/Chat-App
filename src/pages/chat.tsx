@@ -86,7 +86,7 @@ const ChatPage = () => {
       {/* Chat Messages */}
       <div className="flex-grow-1 overflow-auto p-3">
         {messages.map((message) => (
-          <div key={message.id} className={`mb-3 ${message.sender.id === user.id ? 'text-end' : 'text-start'}`}>
+          <div key={message.id} className={`mb-3 ${message.sender_id === user.id ? 'text-end' : 'text-start'}`}>
             {message.image ? (
               <Card className="d-inline-block p-3">
                 <Card.Img variant="top" src={message.image} style={{ maxWidth: '200px' }} />
