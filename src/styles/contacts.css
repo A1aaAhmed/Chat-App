@@ -1,47 +1,69 @@
-body {
-    margin: 0;
-    font-family: 'Segoe UI', sans-serif;
-    background-color: #fefefe;
-  }
-  
-  .contacts-container {
-    padding: 20px;
-   
-    margin: auto;
-   
-  }
-  
-  .contacts-container h4 {
-    margin-bottom: 20px;
-    font-size: 24px;
-    color: #333;
-  }
-  
-  .contacts-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-    gap: 20px;
-  }
-  
-  .contact-card {
-    background-color: #ffffff;
-    padding: 15px;
-    border-radius: 12px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
-  
-  .contact-card img {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-  }
-  
-  .contact-name {
-    margin-top: 10px;
-    font-weight: 500;
-    color: #333;
-  }
-  
+.contacts-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  color: #333;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+.contacts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.contact-card {
+  background: #f9f9f9;
+  padding: 1rem;
+  text-align: center;
+  border-radius: 12px;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  transition: all 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 12px rgba(0,0,0,0.1);
+}
+
+.contact-card img {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.contact-name {
+  margin-top: 0.5rem;
+  font-weight: 500;
+}
+
+.contact-phone {
+  font-size: 0.9rem;
+  margin-top: 4px;
+}
+.image-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.7);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+}
+
+.image-modal img {
+  max-width: 90%;
+  max-height: 90%;
+  border-radius: 8px;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.3);
+  cursor: pointer;
+  transition: transform 0.3s ease;
+}
+
+.image-modal img:hover {
+  transform: scale(1.02);
+}
