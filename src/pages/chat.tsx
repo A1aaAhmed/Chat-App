@@ -71,7 +71,7 @@ const ChatPage = () => {
   }
 
   return (
-    <Container fluid className="p-0 vh-100 d-flex flex-column">
+    <Container fluid className="p-0 d-flex flex-column" style={{ height: 'calc(100vh - 60px)' }}>
       {/* Chat Header */}
       <Card className="border-bottom rounded-0">
         <Card.Body className="d-flex align-items-center">
@@ -84,7 +84,7 @@ const ChatPage = () => {
       </Card>
 
       {/* Chat Messages */}
-      <div className="flex-grow-1 overflow-auto p-3">
+      <div className="flex-grow-1  overflow-auto p-3">
         {messages.map((message) => (
           <div key={message.id} className={`mb-3 ${message.sender_id === user.id ? 'text-end' : 'text-start'}`}>
             {message.image ? (
@@ -96,7 +96,7 @@ const ChatPage = () => {
                 </Card.Body>
               </Card>
             ) : (
-              <Card className="d-inline-block p-1">
+              <Card className=" d-inline-block p-1">
                   <p className="mb-0"><strong>{user.username}</strong></p>
                 <Card.Body className="p-2">
                   <p className="mb-0">{message.text}</p>

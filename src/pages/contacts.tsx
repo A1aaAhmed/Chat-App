@@ -1,4 +1,4 @@
-import { Badge, Button, Col, Container, ListGroup, Nav, Row } from "react-bootstrap";
+/*import { Badge, Button, Col, Container, ListGroup, Nav, Row } from "react-bootstrap";
 import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
 import { Link } from "react-router-dom";
 import {
@@ -23,7 +23,7 @@ const ContactsPage = () => {
   const dispatch = useAppDispatch();
   return ( <>
     <section>
-      {/* Chat List */}
+     
       <Container fluid className="flex-grow-1 overflow-auto">
         <h3>Friends</h3>
 
@@ -50,7 +50,7 @@ const ContactsPage = () => {
                 </Nav.Link>
               </div>
 
-              {/* Buttons */}
+             
               <div className="d-flex gap-2">
                 <Button
                   className="btn-add-fav"
@@ -127,6 +127,42 @@ const ContactsPage = () => {
           </Container>
         </footer>
         </>
+  );
+};
+
+export default ContactsPage;*/
+
+import '../styles/contacts.css'; // تأكدي إن الملف ده موجود و CSS محطوطة فيه
+
+const contactsData = [
+  {
+    name: 'Sara Ahmed',
+    avatar: 'https://ui-avatars.com/api/?name=Sara&background=0D8ABC&color=fff&rounded=true',
+  },
+  {
+    name: 'Omar Khaled',
+    avatar: 'https://ui-avatars.com/api/?name=Omar&background=F39C12&color=fff&rounded=true',
+  },
+  {
+    name: 'Layla Mostafa',
+    avatar: 'https://ui-avatars.com/api/?name=Layla&background=E74C3C&color=fff&rounded=true',
+  },
+  // أضيفي جهات تانية هنا
+];
+
+const ContactsPage = () => {
+  return (
+    <div className="contacts-container">
+      <h4>👥 Contacts</h4>
+      <div className="contacts-grid">
+        {contactsData.map((contact, index) => (
+          <div className="contact-card" key={index}>
+            <img src={contact.avatar} alt={contact.name} />
+            <p className="contact-name">{contact.name}</p>
+          </div>
+        ))}
+      </div>
+    </div>
   );
 };
 

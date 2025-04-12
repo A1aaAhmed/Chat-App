@@ -9,7 +9,7 @@ body {
     background-color: #ffffff;
     width: 100%;
     margin: 0 auto; /* توسيط العنصر */
-    min-height: 100vh;
+    max-height: 100vh;
     box-sizing: border-box;
   }
   

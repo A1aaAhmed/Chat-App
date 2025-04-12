@@ -1,0 +1,47 @@
+body {
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #fefefe;
+  }
+  
+  .contacts-container {
+    padding: 20px;
+   
+    margin: auto;
+   
+  }
+  
+  .contacts-container h4 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    color: #333;
+  }
+  
+  .contacts-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 20px;
+  }
+  
+  .contact-card {
+    background-color: #ffffff;
+    padding: 15px;
+    border-radius: 12px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .contact-card img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+  }
+  
+  .contact-name {
+    margin-top: 10px;
+    font-weight: 500;
+    color: #333;
+  }
+  
