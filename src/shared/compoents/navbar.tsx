@@ -7,12 +7,12 @@ import { IoIosArrowBack } from "react-icons/io";
 
 import { RiContactsLine } from "react-icons/ri";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 // import { Link, Outlet } from "react-router-dom";
 // import Container from 'react-bootstrap/Container';
 // import Nav from 'react-bootstrap/Nav';
 import { NavLink, useLocation } from 'react-router-dom';
-
+import { userId } from "../constants";
 
 
 function Navbar() {
@@ -21,9 +21,31 @@ function Navbar() {
   // Check if current route is "/profile"
   const isProfilePage = location.pathname != '/profile';
   const isChat = location.pathname.includes('user')||location.pathname.includes('chat');
-
+  const [loading, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-  if (isProfilePage) {
+  interface User {
+    name: string;
+    phone: string;
+    userImg?: string;
+    // any other fields
+  }
+  const [user, setUser] = useState<User | null>(null);
+
+  useEffect(() => {
+    fetch(`https://chatapp-backend-production-445b.up.railway.app/userProfile/${userId}`)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data,'test')
+        setUser(data);
+        setLoading(false);
+        console.log(user)
+      })
+      .catch(error => {
+        console.error('Error fetching user:', error);
+        setLoading(false);
+      });
+  }, []);
+  if (isProfilePage && user) {
     return (
       <>
         {/* Sidebar for Mobile View */}
@@ -35,7 +57,7 @@ function Navbar() {
         >
           <div className=" d-flex flex-column justify-start ps-3 pe-3">
             <div className="d-flex justify-content-between align-items-center">
-              <img src="https://img.freepik.com/premium-vector/avatar-profile-icon-flat-style-female-user-profile-vector-illustration-isolated-background-women-profile-sign-business-concept_157943-38866.jpg" className="rounded-circle" width="100" height="100" alt="Avatar" />
+              <img src={user?.userImg} className="rounded-circle mt-5" width="80" height="80" alt="Avatar" />
               <button
                 type="button"
                 className="btn-close"
@@ -44,8 +66,8 @@ function Navbar() {
               // onClick={() => setIsSidebarOpen(false)}
               />
             </div>
-            <h5 className="mt-2">Maha Hassan</h5>
-            <p>+201097751904</p>
+            <h5 className="mt-2">{user?.name}</h5>
+            <p>{user.phone}</p>
           </div>
           <hr />
           <div className="offcanvas-body">

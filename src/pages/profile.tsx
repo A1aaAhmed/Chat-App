@@ -1,8 +1,31 @@
 import { NavLink } from "react-router-dom"
-
-
+import { useState, useEffect, use } from "react";
+import { userId } from "../shared/constants";
 
 const Profile = () => {
+  const [loading, setLoading] = useState(true);
+    interface User {
+      name: string;
+      phone: string;
+      userImg?: string;
+      bio?: string;
+      email?: string
+      // any other fields
+    }
+    const [user, setUser] = useState<User | null>(null);
+  
+    useEffect(() => {
+      fetch(`https://chatapp-backend-production-445b.up.railway.app/userProfile/${userId}`)
+        .then(res => res.json())
+        .then(data => {
+          setUser(data);
+          setLoading(false);
+        })
+        .catch(error => {
+          console.error('Error fetching user:', error);
+          setLoading(false);
+        });
+    }, []);
   return (
     <div
       style={{
@@ -31,7 +54,7 @@ const Profile = () => {
         <div style={{ flex: 1 }} />
 
         {/* Edit Button */}
-        <button
+        {/* <button
           style={{
             background: "none",
             border: "none",
@@ -44,39 +67,23 @@ const Profile = () => {
             alt="Edit"
             style={{ width: 20, height: 20, filter: "brightness(0) invert(1)" }}
           />
-        </button>
+        </button> */}
 
         {/* Menu Button */}
-        <button style={{ background: "none", border: "none", cursor: "pointer" }}>
+        {/* <button style={{ background: "none", border: "none", cursor: "pointer" }}>
           <img
             src="./assets/Buttons/2311524.png"
             alt="Menu"
             style={{ width: 20, height: 20, filter: "brightness(0) invert(1)" }}
           />
-        </button>
+        </button> */}
       </div>
 
       {/* Profile Section */}
       <div style={{ textAlign: "center", position: "relative", marginTop: 10 }}>
-        <div
-          style={{
-            width: 80,
-            height: 80,
-            background: "linear-gradient(135deg, #ffb347, #ffcc33)",
-            borderRadius: "50%",
-            display: "flex",
-            justifyContent: "center",
-            alignItems: "center",
-            fontSize: 30,
-            color: "white",
-            fontWeight: "bold",
-            margin: "0 auto",
-          }}
-        >
-          M
-        </div>
+      <img src={user?.userImg} className="rounded-circle" width="100" height={100} alt="" />
 
-        <div style={{ marginTop: 10, fontSize: 22 }}>Michael</div>
+        <div style={{ marginTop: 10, fontSize: 22 }}>{user?.name}</div>
         <div style={{ color: "#9fa5ad", fontSize: 14 }}>online</div>
       </div>
 
@@ -92,13 +99,21 @@ const Profile = () => {
         <div style={{ color: "#63aee0", marginBottom: 10 }}>Info</div>
 
         <div style={{ marginBottom: 15 }}>
-          <div style={{ fontSize: 18 }}>+201064745778</div>
+          <div style={{ fontSize: 18 }}>{user?.phone}</div>
           <div style={{ color: "#9fa5ad", fontSize: 14 }}>Mobile</div>
         </div>
 
         <div style={{ marginBottom: 15 }}>
-          <div style={{ fontSize: 18 }}>@Michael</div>
+          <div style={{ fontSize: 18 }}>@{user?.name}</div>
           <div style={{ color: "#9fa5ad", fontSize: 14 }}>Username</div>
+        </div>
+        <div style={{ marginBottom: 15 }}>
+          <div style={{ fontSize: 18 }}>{user?.email}</div>
+          <div style={{ color: "#9fa5ad", fontSize: 14 }}>Email</div>
+        </div>
+        <div style={{ marginBottom: 15 }}>
+          <div style={{ fontSize: 18 }}>{user?.bio}</div>
+          <div style={{ color: "#9fa5ad", fontSize: 14 }}>Bio</div>
         </div>
       </div>
     </div>

@@ -65,7 +65,23 @@ const ChatPage = () => {
   //     status: '✔',
   //   },
   // ];
+  // const sendMessage = async () => {
+  //   try {
+  //     const response = await fetch("https://your-server-url.com/api/messages", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         text: message,
+  //         sender_id: "123",
+  //         receiver_id: "456",
+  //       }),
+  //     });
 
+  //     const data = await response.json();
+  //     console.log("Message sent!", data);
+  //   } catch (error) {
+  //     console.error("Error sending message:", error);
+  //   }
+  // };
   if (!userId) {
     return <div>User not found</div>;
   }
