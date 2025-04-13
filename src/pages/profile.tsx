@@ -102,12 +102,4 @@ const Profile = () => {
 };
 
 
-
-const Profile = () => {
-  return (
-    <div>profile</div>
-  )
-}
-
-f425d05014cdae503f063ef90f9cf2da3df27245:src/pages/profile.tsx
 export default Profile
