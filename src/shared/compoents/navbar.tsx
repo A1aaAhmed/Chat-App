@@ -21,7 +21,7 @@ function Navbar() {
   // Check if current route is "/profile"
   const isProfilePage = location.pathname != '/profile';
   const isChat = location.pathname.includes('user')||location.pathname.includes('chat');
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   interface User {
     name: string;

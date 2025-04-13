@@ -1,11 +1,11 @@
 
 
 import { NavLink } from "react-router-dom"
-import { useState, useEffect, use } from "react";
+import { useState, useEffect,  } from "react";
 import { userId } from "../shared/constants";
 
 const Profile = () => {
-  const [loading, setLoading] = useState(true);
+  const [, setLoading] = useState(true);
     interface User {
       name: string;
       phone: string;
