@@ -19,6 +19,7 @@
 // } from "react-icons/fa";
 import {
   
+  Button,
   // Button,
   Container,
   InputGroup,
@@ -35,6 +36,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchAllMessages } from "../store/services/messagesThunks";
 import { AppDispatch, RootState } from "../store/store";
+import toast from "react-hot-toast";
+import { addToContacts, removeFromContacts } from "../store/slices/contacts-slice";
 // import {
 //   addToContacts,
 //   removeFromContacts,
@@ -126,7 +129,7 @@ const Homepage = () => {
                       </p>
                     </div>
                     </Nav.Link>
-                    {/* Buttons
+                     Buttons
                     <div className="position-absolute top-50 end-0 translate-middle-y d-flex   gap-2 px-2">
                       <Button
                         className="btn-add-fav"
@@ -155,7 +158,7 @@ const Homepage = () => {
                           Info
                         </Button>
                       </Nav.Link>
-                    </div> */}
+                    </div> 
                   </div>{" "}
                 </ListGroup.Item>
               ))}
