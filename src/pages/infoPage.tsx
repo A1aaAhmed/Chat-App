@@ -1,6 +1,9 @@
-import { useParams } from "react-router-dom";
-import { useAppSelector } from "../hooks/redux-hooks";
-import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
+import { useLocation } from "react-router-dom";
+import { Card, Col, ListGroup, Row } from "react-bootstrap";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "../store/store";
+import { fetchUser } from "../store/services/userThunks";
 
 
 
@@ -9,36 +12,48 @@ import { Button, Card, Col, ListGroup, Row } from "react-bootstrap";
 
 
 const InfoPage = () => {
-  const params = useParams();
-  const userId = params.id ?? "";
+    const location = useLocation();
+    const { id } = location.state || {}; // Access passed data
+  
+    const dispatch = useDispatch<AppDispatch>();
+    const user = useSelector((state: RootState) => state.user);
+  
+    useEffect(() => {
+      dispatch(fetchUser(id));
+    }, [dispatch, id]);
 
-  const users = useAppSelector((state) => state.users.list);
-  const user = users.filter((item) => {
-    return item.id.toString() === userId.toString();
-  })[0];
+  
 
 
   return (
  
     
-          <Row className="w-100 justify-content-center h-100 mt-4">
+          <Row className="w-100 justify-content-center" style={
+
+            { 
+    
+              height: "80vh",
+              justifyContent: "center",
+              alignItems: "center",  
+            }
+          }>
             <Col xs={12} md={8} lg={6} xl={4}>
               <Card className="shadow-sm">
 
                 {/* Full-width and full-height image */}
                 <Card.Img 
               variant="top" 
-              src={user.image} 
-              alt={user.username} 
+              src={user.userImg} 
+              alt={user.name} 
               className="img-fluid" 
               style={{ height: '150px', objectFit: 'cover' }} 
             />
                 <Card.Body>
                   <Card.Title className="text-center">
-                    {user.username}
+                    {user.name}
                   </Card.Title>
                   <Card.Text className="text-center text-muted">
-                    {user.message}
+                    {user.name}
                   </Card.Text>
                 </Card.Body>
                 <ListGroup className="list-group-flush">
@@ -49,17 +64,6 @@ const InfoPage = () => {
                     Phone: +1 202 555 0181
                   </ListGroup.Item>
                 </ListGroup>
-                <Card.Body className="d-grid gap-2">
-                  <Button variant="primary" size="sm">
-                    Send Message
-                  </Button>
-                  <Button variant="secondary" size="sm">
-                    Share Contact
-                  </Button>
-                  <Button variant="success" size="sm">
-                    Start Secret Chat
-                  </Button>
-                </Card.Body>
               </Card>
             </Col>
           </Row>

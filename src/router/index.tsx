@@ -28,9 +28,8 @@ export const router = createBrowserRouter([
         Component: InfoPage,
       },
       {
-        path: "/chat/:id",
-        Component: ChatPage,
-      },
+        path: "/chat",
+        Component: ChatPage,},
       {
         path: "/not-found",
         Component: NotFoundPage,
@@ -40,7 +39,7 @@ export const router = createBrowserRouter([
         Component: () => <Navigate to="/not-found" />,
       },
       {
-        path: "/user/:id",
+        path: "/user",
         Component: InfoPage,
       },
       {

@@ -19,7 +19,7 @@
 // } from "react-icons/fa";
 import {
   
-  Button,
+  // Button,
   Container,
   InputGroup,
   ListGroup,
@@ -30,19 +30,37 @@ import {
 import {FaEdit,FaSearch} from "react-icons/fa";
 import { Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
-import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
-import {
-  addToContacts,
-  removeFromContacts,
-} from "../store/slices/contacts-slice";
-import toast from "react-hot-toast";
+// import { useAppDispatch, useAppSelector } from "../hooks/redux-hooks";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { fetchAllMessages } from "../store/services/messagesThunks";
+import { AppDispatch, RootState } from "../store/store";
+// import {
+//   addToContacts,
+//   removeFromContacts,
+// } from "../store/slices/contacts-slice";
+// import toast from "react-hot-toast";
 
 const Homepage = () => {
-  const users = useAppSelector((state) => state.users.list);
-  // const contacts = useAppSelector((state) => state.contacts.list);
-  // const chats = useAppSelector((state)=>state.chats.list)
+  const allUsers = useSelector((state: RootState) => state.allMessages.list); 
+  const dispatch = useDispatch<AppDispatch>();
+  const [searchTerm, setSearchTerm] = useState<string>("");
 
-  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(fetchAllMessages()); 
+  }, [dispatch]);
+
+  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchTerm(e.target.value); 
+  };
+
+  const users = allUsers.filter((user) => {
+    const messageText = user.text.toLowerCase();
+    const contactName = user.name.toLowerCase(); 
+    const search = searchTerm.toLowerCase(); 
+
+    return messageText.includes(search) || contactName.includes(search); 
+  });
 
   return (
     <>
@@ -63,6 +81,8 @@ const Homepage = () => {
               <Form.Control
                 type="text"
                 placeholder="Search for messages or users"
+                value={searchTerm}
+                onChange={handleSearchChange} 
               />
             </InputGroup>
           </Container>
@@ -80,7 +100,7 @@ const Homepage = () => {
 
           {/* Chat List */}
           <Container fluid className="flex-grow-1 overflow-auto px-2 ">
-            <h4>Requested Friends</h4>
+            {/* <h4>Requested Friends</h4> */}
 
             <ListGroup>
               {users.map((user) => (
@@ -89,21 +109,24 @@ const Homepage = () => {
                   className="d-flex align-items-center justify-content-sm-start "
                 >
                   {/* <FaUser className="text-primary me-3" size={32} /> */}
+                  <Nav.Link as={Link} to={`/user`} state={{  id: user.id }} >
                   <img
-                    src={user.image} // Use the user's image URL
-                    alt={user.username} // Alt text for accessibility
+                    src={user.img} // Use the user's image URL
+                    alt={user.name} // Alt text for accessibility
                     id="users-image"
                   />
+                  </Nav.Link>
+
                   <div>
-                  <Nav.Link  as={Link} to={`/chat/${user.id}`}>
+                  <Nav.Link  as={Link} to={`/chat`}  state={{ name: user.name, img: user.img, id: user.id }} >
                     <div id="users-name">
-                      <strong>{user.username}</strong>
+                      <strong>{user.name}</strong>
                       <p className="mb-0 text-muted " id="user-message">
-                        {user.message}
+                        {user.text}
                       </p>
                     </div>
                     </Nav.Link>
-                    {/* Buttons */}
+                    {/* Buttons
                     <div className="position-absolute top-50 end-0 translate-middle-y d-flex   gap-2 px-2">
                       <Button
                         className="btn-add-fav"
@@ -132,7 +155,7 @@ const Homepage = () => {
                           Info
                         </Button>
                       </Nav.Link>
-                    </div>
+                    </div> */}
                   </div>{" "}
                 </ListGroup.Item>
               ))}
@@ -187,3 +210,5 @@ const Homepage = () => {
 };
 
 export default Homepage;
+
+

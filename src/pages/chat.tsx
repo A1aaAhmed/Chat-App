@@ -5,13 +5,14 @@ const ChatPage = () => {
 
 export default ChatPage;
 */
-import { useParams } from 'react-router-dom';
-import { useAppSelector } from '../hooks/redux-hooks';
+
 import { Container, Row, Col, Card, Image, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { AppDispatch, RootState } from '../store/store';
 import { useEffect } from 'react';
 import { fetchMessages } from '../store/services/messagesThunks';
+import { useLocation } from 'react-router-dom';
+
 
 
 
@@ -20,17 +21,16 @@ import { fetchMessages } from '../store/services/messagesThunks';
 
 
 const ChatPage = () => {
-  const params = useParams();
-  const userId = params.id ?? "";
+  const location = useLocation();
+  const { name, img, id } = location.state || {}; // Access passed data
+  const userId = id;
 
-  const users = useAppSelector((state) => state.users.list);
-  const user = users.find((item) => item.id.toString() === userId.toString());
   const dispatch = useDispatch<AppDispatch>();
   const messages = useSelector((state: RootState) => state.messages.list);
 
   useEffect(() => {
-    dispatch(fetchMessages());
-  }, [dispatch]);
+    dispatch(fetchMessages(userId));
+  }, [dispatch, userId]);
 
   // // Example messages (replace with actual data from Redux or API)
   // const messages: IMessage[] = [
@@ -65,8 +65,24 @@ const ChatPage = () => {
   //     status: '✔',
   //   },
   // ];
+  // const sendMessage = async () => {
+  //   try {
+  //     const response = await fetch("https://your-server-url.com/api/messages", {
+  //       method: "POST",
+  //       body: JSON.stringify({
+  //         text: message,
+  //         sender_id: "123",
+  //         receiver_id: "456",
+  //       }),
+  //     });
 
-  if (!user) {
+  //     const data = await response.json();
+  //     console.log("Message sent!", data);
+  //   } catch (error) {
+  //     console.error("Error sending message:", error);
+  //   }
+  // };
+  if (!userId) {
     return <div>User not found</div>;
   }
 
@@ -75,9 +91,9 @@ const ChatPage = () => {
       {/* Chat Header */}
       <Card className="border-bottom rounded-0">
         <Card.Body className="d-flex align-items-center">
-          <Image src={user.image} roundedCircle style={{ width: '40px', height: '40px' }} />
+          <Image src={img} roundedCircle style={{ width: '40px', height: '40px' }} />
           <div className="ms-3">
-            <h5 className="mb-0">{user.username}</h5>
+            <h5 className="mb-0">{name}</h5>
             <small className="text-muted">Last seen just now</small>
           </div>
         </Card.Body>
@@ -86,9 +102,10 @@ const ChatPage = () => {
       {/* Chat Messages */}
       <div className="flex-grow-1 overflow-auto p-3">
         {messages.map((message) => (
-          <div key={message.id} className={`mb-3 ${message.sender.id === user.id ? 'text-end' : 'text-start'}`}>
+
+          <div key={message.id} className={`mb-3 px-2 ${message.sender == id ? 'text-end' : 'text-start'}`}>
             {message.image ? (
-              <Card className="d-inline-block p-3">
+              <Card className="d-inline-block p-3 text-start">
                 <Card.Img variant="top" src={message.image} style={{ maxWidth: '200px' }} />
                 <Card.Body className="p-2">
                   <small className="text-muted">{message.fileSize}</small>
@@ -97,7 +114,7 @@ const ChatPage = () => {
               </Card>
             ) : (
               <Card className="d-inline-block p-1">
-                  <p className="mb-0"><strong>{user.username}</strong></p>
+                  <p className="mb-0"><strong>{name}</strong></p>
                 <Card.Body className="p-2">
                   <p className="mb-0">{message.text}</p>
                   {/* <p className="mb-0">{user.message}</p> */}
